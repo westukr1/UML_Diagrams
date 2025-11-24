@@ -1,0 +1,22 @@
+@startuml
+title Payment Approval Process
+
+actor Accountant
+actor Manager
+actor CFO
+participant System
+
+Accountant -> System: Create payment request
+System --> Accountant: Validate data
+Accountant -> Manager: Send for approval
+Manager --> System: Approve payment
+
+alt Amount > 100000
+  System -> CFO: Request additional approval
+  CFO --> System: Approve / Reject
+end
+
+System -> System: Post document to BAS
+System --> Accountant: Notify result
+
+@enduml
